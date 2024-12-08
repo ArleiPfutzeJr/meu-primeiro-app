@@ -12,8 +12,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.simpleapp.models.Post
 import com.example.simpleapp.repositories.Repository
+import com.example.simpleapp.ui.screens.CommentsScreen
+import com.example.simpleapp.ui.screens.PostScreen
+import com.example.simpleapp.ui.screens.HomeScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -23,64 +30,34 @@ import retrofit2.Response
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyApp() {
-    val context = LocalContext.current
-    var posts by remember { mutableStateOf<List<Post>>(emptyList()) }
-
-    // Chamada para buscar os posts ao iniciar o app
-    LaunchedEffect(Unit) {
-        withContext(Dispatchers.IO) {
-            Repository().getPosts().enqueue(object : Callback<List<Post>> {
-                override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            posts = it
-                        }
-                    } else {
-                        Toast.makeText(context, "Falha ao carregar posts", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-                    Toast.makeText(context, "Erro: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
-    }
+    val navController = rememberNavController()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Simple App") }
+                title = { Text("Desenvolvimento: Arlei Pfutze Jr") }
             )
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp)
+        // Gerenciador de Navegação
+        NavHost(
+            navController = navController,
+            startDestination = "homeScreen",
+            modifier = Modifier.padding(paddingValues)
         ) {
-            Text(text = "Bem-vindo ao Simple App!")
-
-            // Exibir os posts usando LazyColumn
-            LazyColumn {
-                items(posts) { post ->
-                    PostItem(post)
-                }
+            composable("homeScreen") {
+                HomeScreen(navController)
+            }
+            composable("postScreen") {
+                PostScreen(navController)
+            }
+            composable("commentsScreen") {
+                CommentsScreen(navController)
             }
         }
     }
 }
 
-@Composable
-fun PostItem(post: Post) {
-    Card(modifier = Modifier.padding(8.dp)) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = post.title, style = MaterialTheme.typography.titleLarge)
-            Text(text = post.body, style = MaterialTheme.typography.bodyLarge)
-        }
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
