@@ -55,12 +55,18 @@ fun CommentsScreen(navController: NavController) {
             .padding(16.dp)
     ) {
         Button(
+            onClick = { navController.navigate("homeScreen") },
+            modifier = Modifier.padding(bottom = 16.dp)
+        ) {
+            Text("Voltar para Home")
+        }
+        Button(
             onClick = { navController.navigate("postScreen") },
             modifier = Modifier.padding(bottom = 16.dp)
         ) {
             Text("Voltar para Posts")
         }
-        Text("Aqui estão os Comentários", modifier = Modifier.padding(bottom = 16.dp))
+        Text("Comentários:", modifier = Modifier.padding(bottom = 16.dp))
 
         // Exibe os comentários
         LazyColumn {

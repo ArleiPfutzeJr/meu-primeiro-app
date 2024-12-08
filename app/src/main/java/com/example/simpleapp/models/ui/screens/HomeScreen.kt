@@ -19,5 +19,8 @@ fun HomeScreen(navController: NavController) {
         Button(onClick = { navController.navigate("postScreen") }) {
             Text("Ver Posts")
         }
+        Button(onClick = { navController.navigate("commentsScreen") }) {
+            Text("Ver Comentarios")
+        }
     }
 }

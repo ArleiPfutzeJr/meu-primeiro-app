@@ -52,12 +52,18 @@ fun PostScreen(navController: NavController) {
             .padding(16.dp)
     ) {
         Button(
+            onClick = { navController.navigate("homeScreen") },
+            modifier = Modifier.padding(bottom = 16.dp)
+        ) {
+            Text("Voltar para Home")
+        }
+        Button(
             onClick = { navController.navigate("commentsScreen") },
             modifier = Modifier.padding(bottom = 16.dp)
         ) {
-            Text("Ver Comentários")
+            Text("Voltar para Comentários")
         }
-        Text("Aqui estão os Posts", modifier = Modifier.padding(bottom = 16.dp))
+        Text("Posts:", modifier = Modifier.padding(bottom = 16.dp))
 
         // Exibe os posts
         LazyColumn {
