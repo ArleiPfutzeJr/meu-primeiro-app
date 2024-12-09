@@ -21,6 +21,7 @@ import com.example.simpleapp.repositories.Repository
 import com.example.simpleapp.ui.screens.CommentsScreen
 import com.example.simpleapp.ui.screens.PostScreen
 import com.example.simpleapp.ui.screens.HomeScreen
+import com.example.simpleapp.ui.screens.PhotoScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -53,6 +54,9 @@ fun MyApp() {
             }
             composable("commentsScreen") {
                 CommentsScreen(navController)
+            }
+            composable("photoScreen") {
+                PhotoScreen(navController)
             }
         }
     }

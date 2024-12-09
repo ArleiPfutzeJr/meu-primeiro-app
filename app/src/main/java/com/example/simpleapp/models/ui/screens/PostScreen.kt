@@ -57,12 +57,6 @@ fun PostScreen(navController: NavController) {
         ) {
             Text("Voltar para Home")
         }
-        Button(
-            onClick = { navController.navigate("commentsScreen") },
-            modifier = Modifier.padding(bottom = 16.dp)
-        ) {
-            Text("Voltar para Comentários")
-        }
         Text("Posts:", modifier = Modifier.padding(bottom = 16.dp))
 
         // Exibe os posts

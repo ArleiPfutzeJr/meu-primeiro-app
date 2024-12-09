@@ -60,12 +60,6 @@ fun CommentsScreen(navController: NavController) {
         ) {
             Text("Voltar para Home")
         }
-        Button(
-            onClick = { navController.navigate("postScreen") },
-            modifier = Modifier.padding(bottom = 16.dp)
-        ) {
-            Text("Voltar para Posts")
-        }
         Text("Comentários:", modifier = Modifier.padding(bottom = 16.dp))
 
         // Exibe os comentários
