@@ -15,7 +15,7 @@ fun HomeScreen(navController: NavController) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Text("Bem-vindo ao Simple App", modifier = Modifier.padding(bottom = 16.dp))
+        Text("Models relacionados a API JsonPlaceHolder:", modifier = Modifier.padding(bottom = 16.dp))
         Button(onClick = { navController.navigate("postScreen") }) {
             Text("Ver Posts")
         }
@@ -24,6 +24,9 @@ fun HomeScreen(navController: NavController) {
         }
         Button(onClick = { navController.navigate("photoScreen") }) {
             Text("Ver Fotos")
+        }
+        Button(onClick = { navController.navigate("albumScreen") }) {
+            Text("Ver Album")
         }
     }
 }

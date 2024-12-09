@@ -63,6 +63,7 @@ fun PhotoScreen(navController: NavController) {
         Button(
             onClick = { navController.navigate("homeScreen") },
             modifier = Modifier.padding(bottom = 16.dp)
+                .align(Alignment.CenterHorizontally)
         ) {
             Text("Voltar para Home")
         }

@@ -1,5 +1,6 @@
 package com.example.simpleapp.repositories
 
+import com.example.simpleapp.models.Album
 import com.example.simpleapp.models.Post
 import com.example.simpleapp.models.Comment
 import com.example.simpleapp.models.Photo
@@ -28,5 +29,8 @@ class Repository {
     }
     fun getPhotos(): Call<List<Photo>> {
         return apiService.getPhotos()
+    }
+    fun getAlbums(): Call<List<Album>> {
+        return apiService.getAlbums()
     }
 }

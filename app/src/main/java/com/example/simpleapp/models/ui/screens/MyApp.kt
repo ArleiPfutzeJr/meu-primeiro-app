@@ -18,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.simpleapp.models.Post
 import com.example.simpleapp.repositories.Repository
+import com.example.simpleapp.ui.screens.AlbumScreen
 import com.example.simpleapp.ui.screens.CommentsScreen
 import com.example.simpleapp.ui.screens.PostScreen
 import com.example.simpleapp.ui.screens.HomeScreen
@@ -36,7 +37,7 @@ fun MyApp() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Desenvolvimento: Arlei Pfutze Jr") }
+                title = { Text("Projeto: Test API JsonPlaceHolder") }
             )
         }
     ) { paddingValues ->
@@ -57,6 +58,9 @@ fun MyApp() {
             }
             composable("photoScreen") {
                 PhotoScreen(navController)
+            }
+            composable("albumScreen") {
+                AlbumScreen(navController)
             }
         }
     }
