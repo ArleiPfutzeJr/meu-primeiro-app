@@ -24,6 +24,7 @@ import com.example.simpleapp.ui.screens.PostScreen
 import com.example.simpleapp.ui.screens.HomeScreen
 import com.example.simpleapp.ui.screens.PhotoScreen
 import com.example.simpleapp.ui.screens.TodoScreen
+import com.example.simpleapp.ui.screens.UserScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -65,6 +66,9 @@ fun MyApp() {
             }
             composable("todoScreen") {
                 TodoScreen(navController)
+            }
+            composable("userScreen") {
+                UserScreen(navController)
             }
         }
     }

@@ -5,6 +5,7 @@ import com.example.simpleapp.models.Post
 import com.example.simpleapp.models.Comment
 import com.example.simpleapp.models.Photo
 import com.example.simpleapp.models.Todo
+import com.example.simpleapp.models.User
 import com.example.simpleapp.network.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -36,5 +37,8 @@ class Repository {
     }
     fun getTodos(): Call<List<Todo>> {
         return apiService.getTodos()
+    }
+    fun getUsers(): Call<List<User>> {
+        return apiService.getUsers()
     }
 }

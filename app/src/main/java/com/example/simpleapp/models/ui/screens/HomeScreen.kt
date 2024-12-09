@@ -34,5 +34,8 @@ fun HomeScreen(navController: NavController) {
         Button(onClick = { navController.navigate("todoScreen") }) {
             Text("Ver Todos")
         }
+        Button(onClick = { navController.navigate("userScreen") }) {
+            Text("Ver Usuarios")
+        }
     }
 }
