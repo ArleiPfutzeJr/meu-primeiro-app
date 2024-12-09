@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -15,7 +16,9 @@ fun HomeScreen(navController: NavController) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Text("Models relacionados a API JsonPlaceHolder:", modifier = Modifier.padding(bottom = 16.dp))
+        Text("Models relacionados a API JsonPlaceHolder:", modifier = Modifier.padding(bottom = 16.dp)
+            .align(Alignment.CenterHorizontally)
+        )
         Button(onClick = { navController.navigate("postScreen") }) {
             Text("Ver Posts")
         }
@@ -26,7 +29,10 @@ fun HomeScreen(navController: NavController) {
             Text("Ver Fotos")
         }
         Button(onClick = { navController.navigate("albumScreen") }) {
-            Text("Ver Album")
+            Text("Ver Albuns")
+        }
+        Button(onClick = { navController.navigate("todoScreen") }) {
+            Text("Ver Todos")
         }
     }
 }

@@ -4,6 +4,7 @@ import com.example.simpleapp.models.Album
 import com.example.simpleapp.models.Post
 import com.example.simpleapp.models.Comment
 import com.example.simpleapp.models.Photo
+import com.example.simpleapp.models.Todo
 import com.example.simpleapp.network.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -32,5 +33,8 @@ class Repository {
     }
     fun getAlbums(): Call<List<Album>> {
         return apiService.getAlbums()
+    }
+    fun getTodos(): Call<List<Todo>> {
+        return apiService.getTodos()
     }
 }
