@@ -2,10 +2,12 @@ package com.example.simpleapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// Tons para tema claro
+val Red80 = Color(0xFFFFCDD2) // Vermelho claro para destaque
+val RedGrey80 = Color(0xFFD7B9B9) // Vermelho acinzentado
+val Black80 = Color(0xFF333333) // Preto claro para fundos
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// Tons para tema escuro
+val Red40 = Color(0xFFD32F2F) // Vermelho escuro para botões/destaques
+val RedGrey40 = Color(0xFFB71C1C) // Vermelho bem escuro
+val Black40 = Color(0xFF121212) // Preto absoluto para fundo

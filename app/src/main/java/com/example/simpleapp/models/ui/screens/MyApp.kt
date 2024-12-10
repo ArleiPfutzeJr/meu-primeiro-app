@@ -1,35 +1,21 @@
 package com.example.simpleapp.models.ui.screens
 
-import android.widget.Toast
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.simpleapp.models.Post
-import com.example.simpleapp.repositories.Repository
-import com.example.simpleapp.ui.screens.AlbumScreen
-import com.example.simpleapp.ui.screens.CommentsScreen
-import com.example.simpleapp.ui.screens.PostScreen
-import com.example.simpleapp.ui.screens.HomeScreen
-import com.example.simpleapp.ui.screens.PhotoScreen
-import com.example.simpleapp.ui.screens.TodoScreen
-import com.example.simpleapp.ui.screens.UserScreen
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.simpleapp.ui.screens.*
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,9 +24,7 @@ fun MyApp() {
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Projeto: Test API JsonPlaceHolder") }
-            )
+            AnimatedTopAppBar() // TopAppBar animada
         }
     ) { paddingValues ->
         // Gerenciador de Navegação
@@ -49,31 +33,48 @@ fun MyApp() {
             startDestination = "homeScreen",
             modifier = Modifier.padding(paddingValues)
         ) {
-            composable("homeScreen") {
-                HomeScreen(navController)
-            }
-            composable("postScreen") {
-                PostScreen(navController)
-            }
-            composable("commentsScreen") {
-                CommentsScreen(navController)
-            }
-            composable("photoScreen") {
-                PhotoScreen(navController)
-            }
-            composable("albumScreen") {
-                AlbumScreen(navController)
-            }
-            composable("todoScreen") {
-                TodoScreen(navController)
-            }
-            composable("userScreen") {
-                UserScreen(navController)
-            }
+            composable("homeScreen") { HomeScreen(navController) }
+            composable("postScreen") { PostScreen(navController) }
+            composable("commentsScreen") { CommentsScreen(navController) }
+            composable("photoScreen") { PhotoScreen(navController) }
+            composable("albumScreen") { AlbumScreen(navController) }
+            composable("todoScreen") { TodoScreen(navController) }
+            composable("userScreen") { UserScreen(navController) }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AnimatedTopAppBar() {
+    // Texto para exibição
+    val message = "Desenvolvido por: Arlei Pfutze Jr / Unirriter     "
+    val animationDelay = 150L
+    var startIndex by remember { mutableStateOf(0) }
+
+    // Animação temporizada
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(animationDelay)
+            startIndex = (startIndex + 1) % message.length
+        }
+    }
+
+    TopAppBar(
+        title = {
+            Text(
+                text = message.substring(startIndex) + message.substring(0, startIndex),
+                maxLines = 1,
+                overflow = TextOverflow.Clip, // Para evitar texto fora da barra
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary, // Cor de fundo da barra
+            titleContentColor = MaterialTheme.colorScheme.onPrimary // Cor do texto
+        )
+    )
+}
 
 @Preview(showBackground = true)
 @Composable
