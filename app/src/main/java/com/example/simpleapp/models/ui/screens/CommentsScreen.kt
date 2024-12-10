@@ -1,17 +1,31 @@
 package com.example.simpleapp.ui.screens
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.simpleapp.models.Comment
 import com.example.simpleapp.repositories.Repository
@@ -50,22 +64,42 @@ fun CommentsScreen(navController: NavController) {
         }
     }
 
+    // Layout principal
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Botão para voltar à Home
         Button(
             onClick = { navController.navigate("homeScreen") },
-            modifier = Modifier.padding(bottom = 16.dp)
-                .align(Alignment.CenterHorizontally)
+            shape = MaterialTheme.shapes.medium,
+            modifier = Modifier
+                .padding(bottom = 16.dp)
+                .align(Alignment.CenterHorizontally),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            )
         ) {
-            Text("Voltar para Home")
+            Text("Voltar para Home", fontSize = 16.sp, fontWeight = FontWeight.Bold)
         }
-        Text("Comentários:", modifier = Modifier.padding(bottom = 16.dp))
 
-        // Exibe os comentários
-        LazyColumn {
+        // Título da tela
+        Text(
+            text = "Lista de Comentários",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.secondary,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        // Lista de comentários em cards
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(8.dp) // Espaçamento entre itens
+        ) {
             items(comments) { comment ->
                 CommentItem(comment)
             }
@@ -75,10 +109,30 @@ fun CommentsScreen(navController: NavController) {
 
 @Composable
 fun CommentItem(comment: Comment) {
-    Card(modifier = Modifier.padding(8.dp)) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = "Nome: ${comment.name}", style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
-            Text(text = "Comentário: ${comment.body}", style = androidx.compose.material3.MaterialTheme.typography.bodyMedium)
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp),
+        elevation = CardDefaults.cardElevation(6.dp),
+        shape = MaterialTheme.shapes.medium
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = "Nome: ${comment.name}",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            Text(
+                text = "Comentário: ${comment.body}",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onSurface
+            )
         }
     }
 }
